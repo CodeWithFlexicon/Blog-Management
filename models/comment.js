@@ -15,7 +15,16 @@ module.exports = (sequelize, DataTypes) => {
   }
   Comment.init(
     {
-      content: DataTypes.TEXT,
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        validation: {
+          len: {
+            args: [1, 500],
+            msg: "Your comment should be between 1 and 500 characters",
+          },
+        },
+      },
       UserId: {
         type: DataTypes.INTEGER,
         references: {
