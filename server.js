@@ -117,7 +117,7 @@ app.delete("/logout", (req, res) => {
 //Get all posts
 app.get("/posts", authenticateUser, async (req, res) => {
   try {
-    const allPosts = await Post.findAll();
+    const allPosts = await Post.findAll({ include: [Comment] });
 
     res.status(200).json(allPosts);
   } catch (err) {
