@@ -147,6 +147,58 @@ app.get("/posts/:id", authenticateUser, async (req, res) => {
   }
 });
 
+//Get all users, probably useful for admins
+app.get("/users", authenticateUser, async (req, res) => {
+  try {
+    const allUsers = await User.findAll();
+
+    res.status(200).json(allUsers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+//Get all posts of a specific user
+app.get("/users/:id/posts", authenticateUser, async (req, res) => {
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const posts = await Post.findAll({
+      where: { UserId: userId },
+    });
+
+    if (posts) {
+      res.status(200).json(posts);
+    } else {
+      res.status(404).send({ message: "User not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
+//Get all comments of a specific user
+app.get("/users/:id/comments", authenticateUser, async (req, res) => {
+  const userId = parseInt(req.params.id, 10);
+
+  try {
+    const comments = await Comment.findAll({
+      where: { UserId: userId },
+    });
+
+    if (comments) {
+      res.status(200).json(comments);
+    } else {
+      res.status(404).send({ message: "User not found" });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: err.message });
+  }
+});
+
 //Get all the comments from a specific post
 app.get("/posts/:id/comments", authenticateUser, async (req, res) => {
   const postId = parseInt(req.params.id, 10);
