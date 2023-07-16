@@ -83,7 +83,7 @@ The following endpoints are available in the API:
 
 - POST */signup*: Allows a user to sign up by providing a name, email, and password. The password is securely hashed using bcryptjs, and a session cookie is created for automatic sign-in after signing up.
 - POST */login*: Allows a returning user to log in if they already have an account. Incorrect credentials are prevented from accessing accounts.
-- GET */logout*: Destroys the session cookie and logs the user out.
+- DELETE */logout*: Destroys the session cookie and logs the user out.
 - GET */posts*: Retrieves all posts along with the associated userId and comments.
 - GET */posts/:id*: Retrieves a specific post along with its comments.
 - GET */users*: Provides a list of all users (for administrative purposes).
@@ -91,6 +91,7 @@ The following endpoints are available in the API:
 - GET */users/:id/comments*: Retrieves all comments made by a specific user.
 - GET */posts/:id/comments*: Lists all comments from the specified post.
 - POST */posts*: Allows a user to create a new post.
+- POST */posts/:id/comments*: Allows a user to comment on the specified post.
 - PATCH */posts/:id*: Allows the original poster to edit their post.
 - PATCH */posts/:postId/comments/:commentId*: Allows the original commenter to edit their comment on a specific post.
 - DELETE */posts/:id*: Allows the original poster to delete their post.
@@ -98,5 +99,75 @@ The following endpoints are available in the API:
 
 Please interact with the endpoints using Postman for further details on their usage.
 
+## Testing
+
+**signup**
+![Signup](/images/signup.png)
+*Successful user sign-up API call*
+
+**logout**
+![Logout](/images/logout.png)
+*Successful user logout API call*
+
+**login(incorrect password)**
+![Login](/images/wrongpassword.png)
+*Incorrect password, validation using bcrypt*
+
+**login**
+![Login](/images/login.png)
+*Successful user login*
+
+**GET /posts**
+![GetPosts](/images/getposts.png)
+*Successful API call to retrieve posts along with userId and comments*
+
+**GET /posts/:id**
+![GetSpecificPost](/images/getspecificpost.png)
+*Successful API call to retrieve specified post*
+
+**GET /users**
+![GetUsers](/images/getusers.png)
+*Successful API call to retrieve list of users*
+
+**GET /users/:id/posts**
+![GetUsersPosts](/images/getpostsfromuser.png)
+*Successful API call to retrieve all posts from specified user*
+
+**GET /users/:id/comments**
+![GetUserComments](/images/getcommentsfromuser.png)
+*Successful API call to retrieve all comments from specified user*
+
+**GET /posts/:id/comments**
+![GetPostComments](/images/getspecificcomment.png)
+*Successful API call to retrieve all comments from specified post*
+
+**POST /posts**
+![Post](/images/postnewpost.png)
+*Successful API call to post a new post*
+
+**POST /posts/:id/comments**
+![PostComment](/images/postnewcomment.png)
+*Successful API call to post a new comment on a specified post*
+
+**PATCH /posts/:id**
+![UpdatePost](/images/updatepost.png)
+*Successful API call to update your post*
+
+**PATCH /posts/:id/comments**
+![UpdateComment](/images/updatecomment.png)
+*Successful API call to update your comment*
+
+**DELETE /posts/:id"
+![DeletePostNotYours](/images/deletepostnotyours.png)
+*Unsuccessful API call to delete a post that is not yours*
+
+**DELETE /posts/:id"
+![DeletePost](/images/deletepost.png)
+*Successful API call to delete your post*
+
+**Posts after deletion**
+![PostsAfterDelete](/images/postandcommentgone.png)
+*Posts after deletion, where both the post and comments of that post are deleted*
+
 ## Authors
-Felix[CodeWithFlexicon](https://github.com/CodeWithFlexicon)
+Felix[(CodeWithFlexicon)](https://github.com/CodeWithFlexicon)
