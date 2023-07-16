@@ -11,12 +11,12 @@ Only users can delete their own posts and comments, preventing unauthorized acce
 
 ## Technologies Used
 
-* PostgreSQL: A powerful open-source relational database management system.
-* Sequelize: An ORM (Object-Relational Mapping) for Node.js that simplifies database operations.
-* bcryptjs: A library for hashing passwords and comparing hashed passwords for authentication.
-* cookies: Used to store session information on the client-side.
-* express-session: Middleware for Express.js to manage user sessions.
-* Postman: A popular API development and testing tool.
+* **PostgreSQL**: A powerful open-source relational database management system.
+* **Sequelize**: An ORM (Object-Relational Mapping) for Node.js that simplifies database operations.
+* **bcryptjs**: A library for hashing passwords and comparing hashed passwords for authentication.
+* **cookies**: Used to store session information on the client-side.
+* **express-session**: Middleware for Express.js to manage user sessions.
+* **Postman**: A popular API development and testing tool.
 
 ## Installation
 
