@@ -12,22 +12,10 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
         allowNull: false,
-        validation: {
-          len: {
-            args: [3, 50],
-            msg: "Your title should be between 3 and 50 characters",
-          },
-        },
       },
       content: {
         type: Sequelize.TEXT,
         allowNull: false,
-        validation: {
-          len: {
-            args: [1, 500],
-            msg: "Your post content must be between 1 and 500 characters",
-          },
-        },
       },
       UserId: {
         type: Sequelize.INTEGER,
