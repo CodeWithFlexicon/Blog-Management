@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         validation: {
           len: {
             args: [1, 500],
-            msg: "Your comment should be between 1 and 500 characters",
+            msg: "Your comment should be between 3 and 500 characters",
           },
         },
       },

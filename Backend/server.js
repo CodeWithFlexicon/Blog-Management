@@ -3,7 +3,13 @@ const app = express();
 const port = 4004;
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
+const authRouter = require("./routes/auth");
+const postsRouter = require("./routes/posts");
 const { Post, User, Comment } = require("./models");
+const {
+  forbiddenErrorHandler,
+  notFoundErrorHandler,
+} = require("./middleware/errorHandlers");
 require("dotenv").config();
 
 app.use((req, res, next) => {
@@ -38,113 +44,6 @@ const authenticateUser = (req, res, next) => {
 
 app.get("/", (req, res) => {
   res.send("Welcome to a blogging website!");
-});
-
-app.post("/signup", async (req, res) => {
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-  try {
-    const user = await User.create({
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword,
-    });
-
-    req.session.userId = user.id;
-
-    res.status(201).json({
-      message: "User created successfully",
-      user: {
-        name: user.name,
-        email: user.email,
-      },
-    });
-  } catch (error) {
-    if (error.name === "SequelizeValidationError") {
-      return res
-        .status(422)
-        .json({ errors: error.errors.amp((e) => e.message) });
-    }
-    res.status(500).json({
-      message: "Error occurred while creating user",
-      error: error,
-    });
-  }
-});
-
-app.post("/login", async (req, res) => {
-  try {
-    const user = await User.findOne({ where: { email: req.body.email } });
-
-    if (user === null) {
-      return res.status(401).json({
-        message: "Incorrect credentials",
-      });
-    }
-
-    bcrypt.compare(req.body.password, user.password, (error, result) => {
-      if (result) {
-        req.session.userId = user.id;
-
-        res.status(200).json({
-          message: "Logged in successfully",
-          user: {
-            name: user.name,
-            email: user.email,
-          },
-        });
-      } else {
-        res.status(401).json({ message: "Incorrect credentials" });
-      }
-    });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "An error has occurred during the login process" });
-  }
-});
-
-app.delete("/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.sendStatus(500);
-    }
-    res.clearCookie("connect.sid");
-    return res.sendStatus(200);
-  });
-});
-
-//Get all posts
-app.get("/posts", authenticateUser, async (req, res) => {
-  try {
-    const allPosts = await Post.findAll({ include: [Comment] });
-
-    res.status(200).json(allPosts);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ message: err.message });
-  }
-});
-
-//Get a specific post
-app.get("/posts/:id", authenticateUser, async (req, res) => {
-  const postId = parseInt(req.params.id, 10);
-
-  try {
-    const post = await Post.findOne({
-      where: { id: postId },
-      include: [Comment],
-    });
-
-    if (post) {
-      res.status(200).json(post);
-    } else {
-      res.status(404).send({ message: "Post not found" });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ message: err.message });
-  }
 });
 
 //Get all users, probably useful for admins
@@ -192,28 +91,6 @@ app.get("/users/:id/comments", authenticateUser, async (req, res) => {
       res.status(200).json(comments);
     } else {
       res.status(404).send({ message: "User not found" });
-    }
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ message: err.message });
-  }
-});
-
-//Get all the comments from a specific post
-app.get("/posts/:id/comments", authenticateUser, async (req, res) => {
-  const postId = parseInt(req.params.id, 10);
-
-  try {
-    const comments = await Comment.findAll({
-      where: {
-        PostId: postId,
-      },
-    });
-
-    if (comments) {
-      res.status(200).json(comments);
-    } else {
-      res.status(404).send({ message: "Comments not found" });
     }
   } catch (err) {
     console.error(err);
@@ -394,6 +271,12 @@ app.delete(
     }
   }
 );
+
+app.use(forbiddenErrorHandler);
+app.use(notFoundErrorHandler);
+
+app.use("/posts", postsRouter);
+app.use("/auth", authRouter);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
