@@ -102,71 +102,71 @@ Please interact with the endpoints using Postman for further details on their us
 ## Testing
 
 **signup**
-![Signup](/images/signup.png)
+![Signup](/Backend/images/signup.png)
 *Successful user sign-up API call*
 
 **logout**
-![Logout](/images/logout.png)
+![Logout](/Backend/images/logout.png)
 *Successful user logout API call*
 
 **login(incorrect password)**
-![Login](/images/wrongpassword.png)
+![Login](/Backend/images/wrongpassword.png)
 *Incorrect password, validation using bcrypt*
 
 **login**
-![Login](/images/login.png)
+![Login](/Backend/images/login.png)
 *Successful user login*
 
 **GET /posts**
-![GetPosts](/images/getposts.png)
+![GetPosts](/Backend/images/getposts.png)
 *Successful API call to retrieve posts along with userId and comments*
 
 **GET /posts/:id**
-![GetSpecificPost](/images/getspecificpost.png)
+![GetSpecificPost](/Backend/images/getspecificpost.png)
 *Successful API call to retrieve specified post*
 
 **GET /users**
-![GetUsers](/images/getusers.png)
+![GetUsers](/Backend/images/getusers.png)
 *Successful API call to retrieve list of users*
 
 **GET /users/:id/posts**
-![GetUsersPosts](/images/getpostsfromuser.png)
+![GetUsersPosts](/Backend/images/getpostsfromuser.png)
 *Successful API call to retrieve all posts from specified user*
 
 **GET /users/:id/comments**
-![GetUserComments](/images/getcommentsfromuser.png)
+![GetUserComments](/Backend/images/getcommentsfromuser.png)
 *Successful API call to retrieve all comments from specified user*
 
 **GET /posts/:id/comments**
-![GetPostComments](/images/getspecificcomment.png)
+![GetPostComments](/Backend/images/getspecificcomment.png)
 *Successful API call to retrieve all comments from specified post*
 
 **POST /posts**
-![Post](/images/postnewpost.png)
+![Post](/Backend/images/postnewpost.png)
 *Successful API call to post a new post*
 
 **POST /posts/:id/comments**
-![PostComment](/images/postnewcomment.png)
+![PostComment](/Backend/images/postnewcomment.png)
 *Successful API call to post a new comment on a specified post*
 
 **PATCH /posts/:id**
-![UpdatePost](/images/updatepost.png)
+![UpdatePost](/Backend/images/updatepost.png)
 *Successful API call to update your post*
 
 **PATCH /posts/:id/comments**
-![UpdateComment](/images/updatecomment.png)
+![UpdateComment](/Backend/images/updatecomment.png)
 *Successful API call to update your comment*
 
 **DELETE /posts/:id"
-![DeletePostNotYours](/images/deletepostnotyours.png)
+![DeletePostNotYours](/Backend/images/deletepostnotyours.png)
 *Unsuccessful API call to delete a post that is not yours*
 
 **DELETE /posts/:id"
-![DeletePost](/images/deletepost.png)
+![DeletePost](/Backend/images/deletepost.png)
 *Successful API call to delete your post*
 
 **Posts after deletion**
-![PostsAfterDelete](/images/postandcommentgone.png)
+![PostsAfterDelete](/Backend/images/postandcommentgone.png)
 *Posts after deletion, where both the post and comments of that post are deleted*
 
 ## Authors
