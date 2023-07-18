@@ -41,10 +41,15 @@ const AuthProvider = ({ children }) => {
         const { user } = await response.json();
         setCurrentUser(user);
         setAuthError(null);
-      } else {
+      } else if (response.status === 422) {
+        const errorData = await response.json();
+        const errorMessage = errorData.errors.join(", "); // Join the errors into a single string
         setCurrentUser(null);
+        setAuthError(errorMessage);
+      } else {
         const errorData = await response.json();
         setAuthError(errorData.message);
+        setCurrentUser(null);
       }
     } catch (error) {
       console.error(error);

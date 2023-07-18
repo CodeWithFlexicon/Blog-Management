@@ -31,6 +31,7 @@ export default function Signup() {
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="name"
               type="text"
+              name="name"
               placeholder="Enter your name"
             />
           </div>
@@ -42,6 +43,7 @@ export default function Signup() {
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="email"
               type="email"
+              name="email"
               placeholder="Enter your email"
             />
           </div>
@@ -53,6 +55,7 @@ export default function Signup() {
               className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
+              name="password"
               placeholder="Enter your password"
             />
           </div>
