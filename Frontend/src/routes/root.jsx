@@ -5,6 +5,7 @@ import {
   useNavigation,
   useLoaderData,
   Form,
+  redirect,
 } from "react-router-dom";
 import classNames from "classnames";
 import { AuthContext } from "../contexts/AuthContext";
@@ -20,19 +21,8 @@ export async function loader({ request }) {
   }
 }
 
-export async function action({ request, navigate }) {
-  const response = await fetch("/blog/auth/logout", {
-    method: "DELETE",
-  });
-
-  alert("You have logged out successfully.");
-
-  return null;
-}
-
 function Root() {
-  const { currentUser } = useLoaderData();
-  const { setCurrentUser, logout } = useContext(AuthContext);
+  const { currentUser, logout } = useContext(AuthContext);
   const navigation = useNavigation();
 
   const outletClasses = classNames(
@@ -43,14 +33,17 @@ function Root() {
     }
   );
 
-  useEffect(() => {
-    setCurrentUser(currentUser);
-  }, [currentUser]);
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    alert("You have been logged out successfully");
+    redirect("/login");
+  };
 
   const renderAuthButtons = () => {
     if (currentUser) {
       return (
-        <Form method="post">
+        <Form method="post" onSubmit={handleLogout}>
           <button
             type="submit"
             className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"

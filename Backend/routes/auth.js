@@ -41,7 +41,7 @@ router.post("/signup", async (req, res) => {
     if (error.name === "SequelizeValidationError") {
       return res
         .status(422)
-        .json({ errors: error.errors.amp((e) => e.message) });
+        .json({ errors: error.errors.map((e) => e.message) });
     }
     res.status(500).json({
       message: "Error occurred while creating user",

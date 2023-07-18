@@ -1,36 +1,28 @@
-import { useState, useContext } from "react";
-import { Link, useNavigate, Form, Navigate, redirect } from "react-router-dom";
+import { useContext } from "react";
+import { Link, Form, Navigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
-export async function action({ request }) {
-  const formData = await request.formData();
-
-  const response = await fetch("/blog/auth/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(Object.fromEntries(formData)),
-  });
-
-  if (response.ok) {
-    const data = await response.json();
-    return data;
-  }
-
-  return redirect("/");
-}
-
 export default function Signup() {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, signup, authError } = useContext(AuthContext);
   if (currentUser) {
     return <Navigate to="/" />;
   }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const credentials = Object.fromEntries(formData);
+    await signup(credentials);
+  };
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="bg-blue-900 shadow-md rounded px-8 py-6 max-w-md w-full">
         <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-        <Form method="post">
+
+        {authError && <div className="text-red-500">{authError}</div>}
+
+        <Form method="post" onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-bold mb-2" htmlFor="name">
               Name
