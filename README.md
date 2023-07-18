@@ -169,5 +169,21 @@ Please interact with the endpoints using Postman for further details on their us
 ![PostsAfterDelete](/Backend/images/postandcommentgone.png)
 *Posts after deletion, where both the post and comments of that post are deleted*
 
+**Login Page**
+![LoginPage](/Backend/images/LoginPage.png)
+
+**Incorrect Login/Empty fields**
+![WrongLogin](/Backend/images/WrongLogin.png)
+
+**After Login**
+![SamplePage](/Backend/images/Samplepage.png)
+
+**Logout**
+![Logout](/Backend/images/Logout.png)
+
+**Empty Signup**
+![SignupEmpty](/Backend/images/SignupEmpty)
+
+
 ## Authors
 Felix[(CodeWithFlexicon)](https://github.com/CodeWithFlexicon)
