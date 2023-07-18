@@ -182,7 +182,7 @@ Please interact with the endpoints using Postman for further details on their us
 ![Logout](/Backend/images/Logout.png)
 
 **Empty Signup**
-![SignupEmpty](/Backend/images/SignupEmpty)
+![SignupEmpty](/Backend/images/SignupEmpty.png)
 
 
 ## Authors
